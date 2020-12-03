@@ -8,10 +8,12 @@ elif ! command -v git &> /dev/null; then
   exit 1
 else
   mkdir -p /opt/apkx
-  cp apkx apkx-libs.jar cfr.jar fernflower.jar /opt/apkx
+  cp apkx cfr.jar fernflower.jar uninstall.sh /opt/apkx
   git clone https://github.com/Storyyeller/enjarify.git /opt/enjarify
-  chmod 755 /opt/apkx/apkx /opt/enjarify/enjarify.sh
+  git clone https://github.com/KoEnix/dex2jar.git /opt/dex2jar
+  chmod 755 /opt/apkx/apkx /opt/enjarify/enjarify.sh /opt/dex2jar/*sh /opt/apkx/uninstall.sh
   ln -s "/opt/enjarify/enjarify.sh" /usr/local/bin/enjarify
   ln -s "/opt/apkx/apkx" /usr/local/bin/apkx
+  ln -s "/opt/dex2jar/d2j-dex2jar.sh" /usr/local/bin/dex2jar
 
 fi
