@@ -1,13 +1,17 @@
-# apkx - Android APK Decompilation for the Lazy
+# apkx (Fork) - Android APK Decompilation for the Lazy
 
 A Python wrapper to popular free dex converters and Java decompilers. Extracts Java source code directly from the APK. Useful for experimenting with different converters/decompilers without having to worry about classpath settings and command line args.
+
+It has been modified from the original apkx tool to work with the newer version of CFR and the new decompiler fernflower, because Procyon wasnt updated for quite a whike now.
+
+Original tool: [apkx](https://github.com/b-mueller/apkx)
 
 ## Installation
 
 ```bash
-$ git clone https://github.com/b-mueller/apkx
+$ git clone https://github.com/koenix/apkx
 $ cd apkx
-$ sudo ./install.sh
+$ sudo bash install.sh
 ```
 
 Notes: 
@@ -30,7 +34,7 @@ Decompiling to HelloWord/src (cfr)
 The default combination of converter and decompiler is <code>dex2jar</code> and <code>cfr</code>. Use the <code>-c</code> and <code>-d</code> flags to change this. E.g.:
 
 ```bash
-$ apkx -c enjarify -d procyon HelloWorld.apk
+$ apkx -c enjarify -d fernflower HelloWorld.apk
 ```
 
 To get help, run:
@@ -43,7 +47,7 @@ $ apkx -h
 
 This script integrates the following tools:
 
-- [Procyon](https://bitbucket.org/mstrobel/procyon) by Mike Strobel - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+- [fernflower](https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler/engine) by IntelliJ- [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 - [CFR](http://www.benf.org/other/cfr/) by Lee Benfield  - [MIT License](https://opensource.org/licenses/MIT)
 - [dex2jar](https://github.com/pxb1988/dex2jar) by Bob Pan - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 - [enjarify](https://github.com/Storyyeller/enjarify) by Storyyeller - [Apache License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)

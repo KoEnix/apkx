@@ -36,9 +36,12 @@ def convert(converter, lib_path, ext_path, infile, outfile):
 def decompile(decompiler, lib_path, ext_path, jar_filename):
 
 	if (decompiler == 'cfr'):
-		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', lib_path, 'org.benf.cfr.reader.Main', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'], stdout=FNULL)
-	elif (decompiler == 'procyon'):
-		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-cp', lib_path, 'com.strobel.decompiler.DecompilerDriver', '-jar', ext_path + '/' + jar_filename, '--o', src_path], stdout=FNULL)
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-jar', cwd+'/cfr.jar', ext_path + '/' + jar_filename, '--outputdir', src_path, '--caseinsensitivefs', 'true', '--silent', 'true'], stdout=FNULL)
+	elif (decompiler == 'fernflower'):
+		subprocess.call(['mkdir',  src_path], stdout=FNULL)
+		subprocess.call(['java','-Xms512m', '-Xmx1024m', '-jar', cwd+'/fernflower.jar', ext_path + '/' + jar_filename, src_path], stdout=FNULL)
+		subprocess.call(['unzip',  src_path + '/' + jar_filename, '-d',src_path + '/' ], stdout=FNULL)
+		subprocess.call(['rm', '-rf', src_path + '/' + jar_filename], stdout=FNULL)
 
 
 '''
@@ -48,7 +51,7 @@ def decompile(decompiler, lib_path, ext_path, jar_filename):
 parser = argparse.ArgumentParser(description='Decompile an Android APK archive.')
 
 parser.add_argument('-c', '--converter', help='Dex to jar conversion method (default: dex2jar)', choices=['dex2jar','enjarify'], default = "dex2jar")
-parser.add_argument('-d', '--decompiler', help='Decompiler backend to use (default: cfr)', choices=['cfr','procyon'], default = "cfr")
+parser.add_argument('-d', '--decompiler', help='Decompiler backend to use (default: cfr)', choices=['cfr','fernflower'], default = "cfr")
 parser.add_argument('apkfile', help='File to decompile')
 
 args = parser.parse_args()
