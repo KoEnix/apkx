@@ -31,7 +31,7 @@ def convert(converter, lib_path, ext_path, infile, outfile):
 	if (converter == 'dex2jar'):
 		subprocess.call(['java', '-Xms512m', '-Xmx1024m', '-cp', lib_path, 'com.googlecode.dex2jar.tools.Dex2jarCmd', ext_path + '/' + infile, '-o', ext_path + '/' + outfile, '-f'])
 	elif (converter == 'enjarify'):
-		subprocess.call([cwd + '/enjarify.pex', ext_path + '/' + infile, '-o', ext_path + '/' + outfile, '--force'])
+		subprocess.call(['enjarify', ext_path + '/' + infile, '-o', ext_path + '/' + outfile, '--force'])
 
 def decompile(decompiler, lib_path, ext_path, jar_filename):
 
